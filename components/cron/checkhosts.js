@@ -71,8 +71,8 @@ function testOtherServers(parameters,host){
 		getAllResponses(parameters)
 }
 
-function nofityFailure(host,res){
-	let telegram=require('./components/cron/sendtelegram')
-	msg=host+"| Problem detected: "+res
+function notifyFailure(host,res){
+	let telegram=require('./sendtelegram')
+	msg=host+" | Problem detected: "+res
 	telegram.sendMSG(msg)
 }
