@@ -2,13 +2,13 @@
 const TelegramBot = require('node-telegram-bot-api');
 
 var args = process.argv.slice(2);
-
+console.log(args)
  
 
 // replace the value below with the Telegram token you receive from @BotFather
 //const token = '689353297:AAHYhFYM3IstFI-vIGwQ0LjqjiqVc4NyKMI';
 const token = require('./../../config_telegram').token;
-console.log(token)
+
 const CHAT_ID='285957520' 
 
 
@@ -16,10 +16,11 @@ const CHAT_ID='285957520'
 const bot = new TelegramBot(token, {});
 
 var message=""
-if (args.length >1)
+if (args.length >1){
   message=args.reduce((x,y)=>x+" "+y)
+  sendMessage(message,bot,CHAT_ID)
+}
 
-sendMessage(bot,CHAT_ID,message)
 
 //// Matches "/echo [whatever]"
 //bot.onText(/\/echo (.+)/, (msg, match) => {
@@ -44,6 +45,12 @@ sendMessage(bot,CHAT_ID,message)
 //});
 
 
-function sendMessage(bot,chatId,msg){
+function sendMessage(msg,chatId){
+  chatId=chatId || CHAT_ID
   bot.sendMessage(chatId,msg);
+}
+
+
+module.exports={
+	sendMSG:sendMessage
 }

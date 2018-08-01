@@ -46,7 +46,7 @@ function getAllResponses(parameters){
 	}).catch(function(err){
 		let host=err.request._options.hostname
 		let response=err.code
-
+		notifyFailure(host,response)
 		writeLog(host,response)
 		testOtherServers(parameters,host)
 	})
@@ -71,3 +71,8 @@ function testOtherServers(parameters,host){
 		getAllResponses(parameters)
 }
 
+function nofityFailure(host,res){
+	let telegram=require('./components/cron/sendtelegram')
+	msg=host+"| Problem detected: "+res
+	telegram.sendMSG(msg)
+}
