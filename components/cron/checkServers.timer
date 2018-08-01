@@ -1,0 +1,9 @@
+[Unit]
+Description=check whether the servers are up
+
+[Timer]
+OnCalendar=*-*-* *:00:00
+Persistent=True
+
+[Install]
+WantedBy=list-timer.target

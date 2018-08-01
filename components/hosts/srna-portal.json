@@ -1,0 +1,6 @@
+{
+	"scheme" : "https",
+	"port":"443",
+	"host":"srna-portal.biodata.pt",
+	"path":"areyouup?"
+}

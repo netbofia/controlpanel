@@ -1,0 +1,9 @@
+[Unit]
+Description=check whether the servers are up.
+
+[Service]
+User=brunocosta
+ExecStart=/home/brunocosta/Downloads/git/controlpanel/components/cron/checkhosts.js
+
+[Install]
+WantedBy=multi-user.target
