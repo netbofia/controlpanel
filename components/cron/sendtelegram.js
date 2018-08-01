@@ -1,13 +1,14 @@
 #!/usr/bin/env node
-
 const TelegramBot = require('node-telegram-bot-api');
 
- 
 var args = process.argv.slice(2);
+
+ 
 
 // replace the value below with the Telegram token you receive from @BotFather
 //const token = '689353297:AAHYhFYM3IstFI-vIGwQ0LjqjiqVc4NyKMI';
-const token = '664374045:AAF4q-UiPKC53Y_nwq_v8-efX7ULvWMiclM';
+const token = require('./../../config_telegram').token;
+console.log(token)
 const CHAT_ID='285957520' 
 
 
@@ -19,6 +20,7 @@ if (args.length >1)
   message=args.reduce((x,y)=>x+" "+y)
 
 sendMessage(bot,CHAT_ID,message)
+
 //// Matches "/echo [whatever]"
 //bot.onText(/\/echo (.+)/, (msg, match) => {
 //  // 'msg' is the received Message from Telegram
