@@ -17,6 +17,20 @@ The log will appear as as [host].log in components/hosts
 
 Add the unit files in components/cron to set systemd timer
 
+Telegram notification
+=====================
+Create the bot by talking to the @BotFather
+/newbot set it up
+/token  to generate the token for the previously setup bot.
+
+Then setup the token in config_telegram.js
+```
+module.exports = {
+	token: 'yourtokenhere',
+	chatid: 'thedesiredchatid'
+}
+```
+Set the chat id in components/cron/sendtelegram.js
 
 Heatmap
 =======
