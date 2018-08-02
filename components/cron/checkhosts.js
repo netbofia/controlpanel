@@ -25,7 +25,6 @@ function getParameters(hosts){
 }
 
 function getAllResponses(parameters){
-	console.log(parameters)
 	var promises=[]
 	for (i in parameters){
 		let param=parameters[i]
@@ -37,7 +36,7 @@ function getAllResponses(parameters){
 	}
 	Promise.all(promises).then(function(values){
 		for (i in values){
-			let host=values[i].request.socket.servername 
+			let host=values[i].request.socket._host 
 			let response=values[i].data
 			let code=values[i].status
 			response=="yes" ? writeLog(host,code) : writeLog(host,"UNKNOWN_ERROR")
