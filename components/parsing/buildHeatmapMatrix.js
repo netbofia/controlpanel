@@ -1,6 +1,6 @@
 var data=require('./getLog')
 
-var file="/home/brunocosta/Transferências/git/controlpanel/components/parsing/../hosts/srna-portal.biodata.pt.log"
+var file="/home/brunocosta/Downloads/git/controlpanel/components/parsing/../hosts/srna-portal.biodata.pt.log"
 const days=7
 const hours=24
 
