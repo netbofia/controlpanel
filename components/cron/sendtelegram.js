@@ -3,13 +3,11 @@ const TelegramBot = require('node-telegram-bot-api');
 
 var args = process.argv.slice(2);
 console.log(args)
- 
+var config = require('./../../config_telegram')
 
 // replace the value below with the Telegram token you receive from @BotFather
-//const token = '689353297:AAHYhFYM3IstFI-vIGwQ0LjqjiqVc4NyKMI';
-const token = require('./../../config_telegram').token;
-
-const CHAT_ID='285957520' 
+const token = config.token;
+const CHAT_ID=config.chatid
 
 
 // Create a bot that uses 'polling' to fetch new updates
