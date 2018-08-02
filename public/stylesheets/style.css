@@ -6,3 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+.heatmap{
+}
+.heatmap .row{
+	display: grid;
+	grid-template-columns: repeat(7, 52px);
+	grid-template-rows: 7px;
+	grid-gap: 5px;
+}
+.heatmap .bloc{
+	width: 50px;
+	height: 5px;
+    border-radius: 5px;
+    border: 2px solid #908a8ab5;
+}
+.heatmap .row-label{
+	text-decoration:strong; 
+	text-align:center; 
+}

@@ -1,0 +1,12 @@
+.heatmap
+	each row,r in matrix.data
+		.row
+			each col,c in row
+				.bloc(style="background-color:"+col.color+";",title=col.title)
+	.row
+		each day in matrix.labels.cols
+			.row-label
+				- day=day.split("\n")
+				p(style="font-weight:bold")=day[0]
+					br 
+					| #{day[1]}
