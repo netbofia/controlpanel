@@ -6,7 +6,7 @@
 var fs = require('fs');
 var glob = require('glob');
 var axios = require('axios');
-
+var expectedResponse="yes";
 
 
 //Possible problem in path
@@ -24,6 +24,7 @@ function getParameters(hosts){
 	return result
 }
 
+
 function getAllResponses(parameters){
 	var promises=[]
 	for (i in parameters){
@@ -39,7 +40,9 @@ function getAllResponses(parameters){
 			let host=values[i].request.socket._host 
 			let response=values[i].data
 			let code=values[i].status
-			response=="yes" ? writeLog(host,code) : writeLog(host,"UNKNOWN_ERROR")
+			//Choose one
+			response==expectedResponse ? writeLog(host,code) : writeLog(host,"UNKNOWN_ERROR")
+			//code==200 ? writeLog(host,code) : writeLog(host,"UNKNOWN_ERROR")
 		}
 
 	}).catch(function(err){
