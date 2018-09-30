@@ -3,5 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-
-  include includes/heatmap.pug
+  each title, index in titles
+    h2=title   
+    - matrix=matrices[index]
+    include includes/heatmap.pug
