@@ -4,9 +4,12 @@ var data = require('./../components/parsing/buildHeatmapMatrix')
 /* GET home page. */
 router.get('/', function(req, res, next) {
  
-  data.matrix.then((matrix)=>{
-  	console.log(matrix.labels.cols)
-    res.render('index', { title: 'Express', matrix: matrix });
+  data.matrices().then((result)=>{
+  	Promise.all(result.matrices).then(function(values){
+    	res.render('index', { title: 'Control Panel',titles:result.hosts, matrices: values });
+  	})
+  }).catch(function(err){
+  	res.status(statusCode).json(err);  
   })
 });
 
