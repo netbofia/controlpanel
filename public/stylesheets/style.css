@@ -9,6 +9,7 @@ a {
 
 
 .heatmap{
+	margin-bottom:50px;
 }
 .heatmap .row{
 	display: grid;
