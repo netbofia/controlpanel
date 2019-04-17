@@ -1,5 +1,6 @@
 [Unit]
 Description=web server with heatmaps.
+After=network.target
 
 [Service]
 User=brunocosta
