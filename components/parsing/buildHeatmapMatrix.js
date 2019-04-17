@@ -13,7 +13,7 @@ exports.matrices=function(){
 		try{
 			result={hosts:hosts,matrices:[]}
 			for(h in hosts){
-				file="/home/brunocosta/Downloads/git/controlpanel/components/hosts/"+hosts[h]+"."+host+".log"
+				file=__dirname+"/../components/hosts/"+hosts[h]+"."+host+".log"
 				console.log(file)
 				result.matrices.push(data.getMatrix(file).then((res)=>{
 
