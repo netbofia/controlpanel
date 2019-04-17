@@ -1,0 +1,7 @@
+#!/usr/bin/env bash	
+
+USER="brunocosta"
+PATHDIR="/home/$USER/git/controlpanel"
+#Executable script for systemd
+cd $PATHDIR
+nodemon start

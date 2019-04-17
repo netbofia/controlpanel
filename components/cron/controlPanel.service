@@ -1,0 +1,9 @@
+[Unit]
+Description=web server with heatmaps.
+
+[Service]
+User=brunocosta
+ExecStart=/home/brunocosta/Downloads/git/controlpanel/bin/controlpanel
+
+[Install]
+WantedBy=multi-user.target
