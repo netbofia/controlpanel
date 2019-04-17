@@ -7,7 +7,8 @@ function getHosts(){
 }
 
 //Loads host parameter files
-function getHostParameters(hosts){
+function getHostParameters(){
+	let hosts=getHosts()
 	var result=[]
 	for (i in hosts){
 		result.push(require(hosts[i]))

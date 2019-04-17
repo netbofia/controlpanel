@@ -35,22 +35,22 @@ if (args.length >1){
 //  bot.sendMessage(chatId, 'Received your message '+chatId);
 //});
 
-function listenForMessage(bot,servers,callback){
+function listenForMessage(bot,hosts,callback){
 	//receive call back with the logic 
 	// reply to https://github.com/yagop/node-telegram-bot-api/blob/master/doc/api.md#TelegramBot+onReplyToMessage
 
 	return new Promise(function(res,rej){
 		var result={action:false,server:""}
-
 		bot.onText(/restart server (.+)/, (msg, match) => {
-		  const chatId = msg.chat.id;
-		  // 
-		  // send a message to the chat acknowledging receipt of their message
-		 
+		  const chatId = msg.chat.id; 
 		  var server=match[1]
-		  
-		  if( server == "test"){  //in array
-			bot.sendMessage(bot,chatId, 'Received your request! Restarting '+server);
+
+		 
+		  if( hosts.indexOf(server) >= 0 ){  //in array
+
+		  	//callback///
+		  	// send a message to the chat acknowledging receipt of their message
+			bot.sendMessage(chatId, 'Received your request! Restarting '+server); //Should use function no?
 			result.action=true	  	
 			result.server=server
 
