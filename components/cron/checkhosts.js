@@ -6,9 +6,7 @@ const { writeLog }=require('./../helpers/log_data')
 var expectedResponse="yes"; //on server
 
 
-var hosts=ghp.getHosts()
-console.log(hosts)
-var parameters=ghp.getHostParameters(hosts)
+var parameters=ghp.getHostParameters()
 ghp.getAllHostResponses(parameters,callback)
 
 
