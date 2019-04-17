@@ -18,6 +18,10 @@ This configuration by default expects a "yes" response but you can set it to any
 The log will appear as as [host].log in components/hosts
 
 Add the unit files in components/cron to set systemd timer
+or link them with: 
+```
+systemctl link /abs/path
+```
 
 Telegram notification
 =====================
