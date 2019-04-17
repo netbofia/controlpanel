@@ -13,7 +13,10 @@ const CHAT_ID=config.chatid
 
 
 // Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, {polling:true});
+function buildBot(polling){
+	const bot = new TelegramBot(token, {polling:polling});
+	return bot
+}
 
 var message=""
 if (args.length >1){
@@ -32,7 +35,7 @@ if (args.length >1){
 //  bot.sendMessage(chatId, 'Received your message '+chatId);
 //});
 
-function listenForMessage(){
+function listenForMessage(bot,servers,callback){
 	//receive call back with the logic 
 	// reply to https://github.com/yagop/node-telegram-bot-api/blob/master/doc/api.md#TelegramBot+onReplyToMessage
 
@@ -47,7 +50,7 @@ function listenForMessage(){
 		  var server=match[1]
 		  
 		  if( server == "test"){  //in array
-			bot.sendMessage(chatId, 'Received your request! Restarting '+server);
+			bot.sendMessage(bot,chatId, 'Received your request! Restarting '+server);
 			result.action=true	  	
 			result.server=server
 
@@ -60,7 +63,7 @@ function listenForMessage(){
 
 
 
-function sendMessage(msg,chatId){
+function sendMessage(bot,msg,chatId){
   chatId=chatId || CHAT_ID
   bot.sendMessage(chatId,msg);
 }
@@ -69,5 +72,5 @@ function sendMessage(msg,chatId){
 module.exports={
 	sendMSG:sendMessage,
 	listen:listenForMessage,
-	bot:bot
+	bot:buildBot
 }

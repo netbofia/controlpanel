@@ -1,6 +1,10 @@
 var axios = require('axios');
+var glob = require('glob');
 
-
+function getHosts(){
+	var hosts=glob.sync(__dirname+'/../hosts/*.json')
+	return hosts
+}
 
 //Loads host parameter files
 function getHostParameters(hosts){
@@ -62,12 +66,14 @@ function testOtherServers(parameters,host,callback){
 
 function notifyFailure(hr){
 	let telegram=require('./telegram')
+	const bot=telegram.bot(false)
 	msg=hr.host+" | Problem detected: "+hr.code
-	telegram.sendMSG(msg)
+	telegram.sendMSG(bot,msg)
 }
 
 
 module.exports={
+	getHosts:getHosts,
 	getHostParameters:getHostParameters,
 	getAllHostResponses:getAllHostResponses
 }

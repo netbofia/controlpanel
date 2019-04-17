@@ -4,6 +4,7 @@ var execCommands = require('./../helpers/execCommands')
 var servers={}
 var callback={}
 
+const bot = telegram.bot(polling=true)
 telegram.listen(servers,callback).then(function(res){
 	if(res.action){
 		console.log(res)
