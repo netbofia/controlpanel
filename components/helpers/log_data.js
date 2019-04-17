@@ -12,5 +12,5 @@ function writeLog(host,res){
 }
 
 module.exports={
-	writeLog:writeLog
+
 }
