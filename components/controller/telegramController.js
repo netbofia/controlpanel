@@ -73,7 +73,7 @@ function checkhostCallBack(response){
 		retry=0
 		//notify restart worked as expected
 	}else{
-		if (retry>2) restartServer(host).catch(function(err){
+		restartServer(host).catch(function(err){
 			telegram.sendMSG(bot,err)
 		})
 		let retryTime=parseTime()
