@@ -16,26 +16,30 @@ function getHostParameters(){
 	return result
 }
 
+function getSpecificHostParameters(host){
+	let params=getHostParameters()
+	let hostParams={}
+	params.forEach(function(param){
+		if(param.host==host){
+			hostParams=param
+		}
+	})
+	return hostParams
+}
+
+function getHostResponse(p){  
+	//@returns Promise
+	return axios(p.scheme+"://"+p.host+"/"+p.path)
+}
 
 function getAllHostResponses(parameters,callback){
-	var promises=[]
+	//@return Array of promises
+	var hostResponses=[]
 	for (i in parameters){
-		let p=parameters[i]
-		promises.push(axios(p.scheme+"://"+p.host+"/"+p.path))
+		let param=parameters[i]
+		hostResponses.push(getHostResponse(param))
 	}
-	Promise.all(promises).then(function(values){
-		for (i in values){
-			let hostResponse=parseResponse(values[i])
-			callback(hostResponse)
-		}
-	}).catch(function(err){
-		let hostResponse=parseResponse(err,true)
-		callback(hostResponse)
-		//The following logic should be done by the callback based on the response
-		notifyFailure(hostResponse)
-		testOtherServers(parameters,hostResponse.host,callback)
-		//########end callback logic############
-	})
+	return Promise.all(hostResponses)
 }
 
 function parseResponse(res,err){
@@ -57,13 +61,26 @@ function parseResponse(res,err){
 }
 
 
-function testOtherServers(parameters,host,callback){
-		for (i in parameters){
-			if (parameters[i].host==host)
-				parameters.splice(i,1)
-		}
-		getAllHostResponses(parameters,callback)
+function hostsList(){
+	var hostParams=getHostParameters()
+	var hosts=[]
+	hostParams.forEach(function(host){
+		hosts.push(host.host)
+	})
+	return hosts
 }
+
+function removeServerFromList(parameters,host){
+	for (i in parameters){
+		if (parameters[i].host==host)
+			parameters.splice(i,1)
+	}
+	return parameters
+}
+
+
+
+/////////////// telegram functions
 
 function notifyFailure(hr){
 	let telegram=require('./telegram')
@@ -76,5 +93,11 @@ function notifyFailure(hr){
 module.exports={
 	getHosts:getHosts,
 	getHostParameters:getHostParameters,
-	getAllHostResponses:getAllHostResponses
+	getAllHostResponses:getAllHostResponses,
+	parseResponse:parseResponse,
+	notifyFailure:notifyFailure,
+	getSpecificHostParameters:getSpecificHostParameters,
+	getHostResponse:getHostResponse,
+	hostsList:hostsList,
+	removeServerFromList:removeServerFromList,
 }

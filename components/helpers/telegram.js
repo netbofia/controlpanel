@@ -45,12 +45,10 @@ function listenForMessage(bot,hosts,callback){
 		  const chatId = msg.chat.id; 
 		  var server=match[1]
 
-		 
 		  if( hosts.indexOf(server) >= 0 ){  //in array
-
 		  	//callback///
-		  	// send a message to the chat acknowledging receipt of their message
-			bot.sendMessage(chatId, 'Received your request! Restarting '+server); //Should use function no?
+		  	// Unnecessary!! || send a message to the chat acknowledging receipt of their message
+			bot.sendMessage(chatId, 'Received your request! Attempting to restart '+server); //Should use function no?
 			result.action=true	  	
 			result.server=server
 
