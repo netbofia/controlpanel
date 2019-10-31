@@ -1,0 +1,6 @@
+{
+	"scheme" : "http",
+	"port":"80",
+	"host":"balanis.fc.ul.pt",
+	"path":"/labcheck/areyouup?"
+}
