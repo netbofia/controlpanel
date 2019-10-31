@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 function writeLog(hostResponse,parseResponse){
-	let response = parseResponse ? hostResponse.response.state : hostResponse.response
+	let response = parseResponse ? hostResponse.response.state : hostResponse.code
 	let code = hostResponse.code
 	let host = hostResponse.host
 	let hostFileName = hostResponse.hostFileName
