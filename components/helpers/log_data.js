@@ -1,11 +1,15 @@
 var fs = require('fs');
 
-function writeLog(host,res){
+function writeLog(hostResponse,parseResponse){
+	let response = parseResponse ? hostResponse.response.state : hostResponse.response
+	let code = hostResponse.code
+	let host = hostResponse.host
+	let hostFileName = hostResponse.hostFileName
 	var iso = new Date()
 	var now = Date.now()
 	
-	let output=iso+"\t"+now+"\t"+host+"\t"+res
-	fs.appendFile(__dirname+'/../hosts/'+host+'.log', output+"\n", function (err) {
+	let output=iso+"\t"+now+"\t"+host+"\t"+response
+	fs.appendFile(__dirname+'/../hosts/'+hostFileName+'.log', output+"\n", function (err) {
 	  if (err) throw err;
 	  console.log('Saved!: '+output);
 	});
