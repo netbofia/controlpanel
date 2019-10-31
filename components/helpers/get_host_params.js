@@ -1,18 +1,20 @@
 var axios = require('axios');
 var glob = require('glob');
+var path = require('path')
 
-function getHosts(){
-	var hosts=glob.sync(__dirname+'/../hosts/*.json')
-	return hosts
+function getHostFiles(){
+	var hostsFiles=glob.sync(__dirname+'/../hosts/*.json')
+	return hostsFiles
 }
 
 //Loads host parameter files
 function getHostParameters(){
-	let hosts=getHosts()
+	let hostsFiles=getHostFiles()
 	var result=[]
-	for (i in hosts){
-		result.push(require(hosts[i]))
-	}
+	hostsFiles.forEach(function(hostFile){
+		hostFileName=path.basename(hostFile, ".json")
+		result.push(Object.assign(require(hostFile),{hostFileName:hostFileName}))
+	})
 	return result
 }
 
@@ -39,12 +41,13 @@ function getAllHostResponses(parameters,callback){
 		let param=parameters[i]
 		hostResponses.push(getHostResponse(param))
 	}
-	return Promise.all(hostResponses)
+	console.log()
+	return Promise.allSettled(hostResponses)
 }
 
-function parseResponse(res,err){
+function parseResponse(res){
 	let response; //possible error???? initiation only!!! 
-	if(err){ //Accepts anything as an error
+	if(res instanceof Error){ //Accepts anything as an error
 		response={
 			host:res.request._options.hostname || "UNKNOWN_HOST",
 			code:res.code || "UNKNOWN_ERROR",
@@ -84,14 +87,15 @@ function removeServerFromList(parameters,host){
 
 function notifyFailure(hr){
 	let telegram=require('./telegram')
+	let response= typeof hr.response == "object" ? `| ${hr.response.state}%` : null
 	const bot=telegram.bot(false)
-	msg=hr.host+" | Problem detected: "+hr.code
+	msg=`${hr.host} | Problem detected: ${hr.code} ${response}`
 	telegram.sendMSG(bot,msg)
 }
 
 
 module.exports={
-	getHosts:getHosts,
+//	getHosts:getHosts,
 	getHostParameters:getHostParameters,
 	getAllHostResponses:getAllHostResponses,
 	parseResponse:parseResponse,
