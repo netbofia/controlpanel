@@ -67,8 +67,9 @@ function checkHost(host,processResponse){
 ////////////////Actions for checkHost Response /////
 function checkhostCallBack(response){
 	let host=response.host
-	if(response.response==expectedResponse){
-		msg=host+" is online"
+	if(response.response==expectedResponse || response.response.state > 0){
+		let response = JSON.stringify(response.response)
+		msg=host+` is online - ${response}`
 		telegram.sendMSG(bot,msg)
 		retry=0
 		//notify restart worked as expected
