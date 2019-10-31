@@ -19,7 +19,8 @@ ghp.getAllHostResponses(parameters,callback).then(function(values){
 				})
 				let response = hostResponse.response
 				if( typeof response == "object" ){
-					parseInt(response.state) > STATE_MIN ? callback(hostResponse) : ghp.notifyFailure(hostResponse)
+					parseInt(response.state) > STATE_MIN ? null : ghp.notifyFailure(hostResponse)
+					callback(hostResponse)
 				}else{
 					callback(hostResponse)
 				}
