@@ -1,8 +1,8 @@
 var data=require('./getLog')
 var glob=require('glob')
 var path=require('path')
+var pal = require('nice-color-palettes')
 
-const host="biodata.pt"
 const days=7
 const hours=24
 const hosts=getHostNames()
@@ -13,7 +13,7 @@ exports.matrices=function(){
 		try{
 			result={hosts:hosts,matrices:[]}
 			for(h in hosts){
-				file=__dirname+"/../hosts/"+hosts[h]+"."+host+".log"
+				file=__dirname+"/../hosts/"+hosts[h]+".log"
 				console.log(file)
 				result.matrices.push(data.getMatrix(file).then((res)=>{
 
@@ -40,10 +40,13 @@ exports.matrices=function(){
 							let key=keys[j]
 							let row=parseInt(key)
 							//Add values to matrix
-							if (res[currentDate][key]=="200"){
+							response=res[currentDate][key]
+							if (response=="200"){
 								color="green"
 							}else{
-								color="red"
+
+								color = typeof parseInt(response) == "number"  && parseInt(response) != 0? pal[7][parseInt(response)/5] : "red"
+
 							}
 							matrix.data[row][col]={
 								color:color,
