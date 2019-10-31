@@ -2,6 +2,8 @@ const telegram = require('./../helpers/telegram')
 const bot = telegram.bot(polling=true)
 const execCommands = require('./../helpers/execCommands')
 const ghp=require('./../helpers/get_host_params')
+const STATE_MIN = require('./../../config.js').state_min
+
 
 var expectedResponse=require('./../../config.js').expectedResponse
 var hosts=ghp.hostsList()
@@ -67,7 +69,7 @@ function checkHost(host,processResponse){
 ////////////////Actions for checkHost Response /////
 function checkhostCallBack(response){
 	let host=response.host
-	if(response.response==expectedResponse || response.response.state > 0){
+	if(response.response==expectedResponse || response.response.state > STATE_MIN){
 		let response = JSON.stringify(response.response)
 		msg=host+` is online - ${response}`
 		telegram.sendMSG(bot,msg)

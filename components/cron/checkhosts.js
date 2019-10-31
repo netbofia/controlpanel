@@ -3,8 +3,8 @@
 //Cron Job Script to check if servers are up.
 var ghp=require('./../helpers/get_host_params')
 const { writeLog }=require('./../helpers/log_data')
-var expectedResponse=require('./../../config.js').expectedResponse
-const STATE_MIN = 40
+const expectedResponse=require('./../../config.js').expectedResponse
+const STATE_MIN = require('./../../config.js').state_min
 
 var parameters=ghp.getHostParameters()
 ghp.getAllHostResponses(parameters,callback).then(function(values){
@@ -58,8 +58,5 @@ function failure(err,callback){
 	//The following logic should be done by the callback based on the response
 	ghp.notifyFailure(hostResponse)
 	
-	//parameters=ghp.removeServerFromList(parameters,hostResponse.host)
-	//ghp.getAllHostResponses(parameters,callback) //This should run the first block as a funtion
-	//########end callback logic############
 
 }
