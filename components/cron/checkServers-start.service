@@ -1,0 +1,10 @@
+[Unit]
+Description=start check whether the servers are up.
+
+[Service]
+User=root
+Type=oneshot
+ExecStart=/bin/systemctl start checkServers.timer
+
+[Install]
+WantedBy=multi-user.target
