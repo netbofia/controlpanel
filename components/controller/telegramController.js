@@ -11,6 +11,7 @@ var callback={} //not defined telegram might be remodelled
 
 var retry=0
 
+//Wrap this as a function once this promise is fulfilled run it again
 telegram.listen(bot,hosts,callback).then(function(res){
 	if(res.action){
 		checkHost(res.server,checkhostCallBack)
@@ -80,7 +81,7 @@ function checkhostCallBack(response){
 			telegram.sendMSG(bot,err)
 		})
 		let retryTime=parseTime()
-		msg=host+" isn't ready yet! Reset will be executed again in "+retryTime.time+" "+retryTime.unit
+		msg=`${host} isn't ready yet! Reset will be executed again in ${retryTime.time} ${retryTime.unit}`
 		if (retry>0) telegram.sendMSG(bot,msg)
 		retryAction(host)
 	}
