@@ -1,8 +1,8 @@
 var data=require('./getLog')
 var glob=require('glob')
 var path=require('path')
-var pal = require('nice-color-palettes')
-
+//var pal = require('nice-color-palettes')
+var pal=["#2dc937","#99c140","#e7b416","#db7b2b","#cc3232"] 
 const days=7
 const hours=24
 const hosts=getHostNames()
@@ -45,7 +45,7 @@ exports.matrices=function(){
 								color="green"
 							}else{
 
-								color = typeof parseInt(response) == "number"  && parseInt(response) != 0? pal[7][parseInt(response)/5] : "red"
+								color = typeof parseInt(response) == "number"  && parseInt(response) != 0? pal[parseInt(response)/5] : "red"
 
 							}
 							matrix.data[row][col]={
