@@ -45,7 +45,7 @@ exports.matrices=function(){
 								color="green"
 							}else{
 
-								color = typeof parseInt(response) == "number"  && parseInt(response) != 0? pal[parseInt(response)/5] : "red"
+								color = typeof parseInt(response) == "number"  && parseInt(response) != 0 ? pal[parseInt(response)/20] : "red"
 
 							}
 							matrix.data[row][col]={
