@@ -11,7 +11,7 @@ module.exports=function(params){
 			let currentServer=serverList[type][name]
 			host=currentServer.alias || currentServer.host
 			if(host == "") rej("no host")
-			var command="ssh "+host+" stat -c %y /var/lib/apt/periodic/update-success-stamp;df -h | grep '/$',df -h | grep '/home'"
+			var command="ssh "+host+" stat -c %y /var/lib/apt/periodic/update-success-stamp;df -h | grep '/$';df -h | grep '/home'"
 			cmd(command, callback)
 		
 			function callback(err, stdout, stderr){
