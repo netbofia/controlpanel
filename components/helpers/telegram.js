@@ -56,6 +56,21 @@ function listenForMessage(bot,hosts,callback){
 
 		  }
 		});
+		bot.onText(/list (.+)/, (msg, match) => {
+		  const chatId = msg.chat.id; 
+		  var server=match[1]
+
+		  if( hosts.indexOf(server) >= 0 ){  //in array
+		  	//callback///
+		  	// Unnecessary!! || send a message to the chat acknowledging receipt of their message
+			bot.sendMessage(chatId, 'Received your request! Attempting to restart '+server); //Should use function no?
+			result.action=true	  	
+			result.server=server
+
+		  	res(result)
+
+		  }
+		});
 	})
 }
 
@@ -70,5 +85,4 @@ function sendMessage(bot,msg,chatId){
 module.exports={
 	sendMSG:sendMessage,
 	listen:listenForMessage,
-	bot:buildBot
-}
+	bot:buildBot}

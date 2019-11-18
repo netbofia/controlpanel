@@ -3,7 +3,41 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  each title, index in titles
-    h2=title   
-    - matrix=matrices[index]
-    include includes/heatmap.pug
+  .container-fluid
+    .row
+      .col-6
+        each title, index in titles
+          h2=title   
+          - matrix=matrices[index]
+          include includes/heatmap.pug
+      .col-6
+        each server in servers.direct
+          .card
+            .card-body
+              h5.card-title=server.name
+              h6.card-subtitle.mb-2.text-muted=server.distro
+              p.card-text=`Last check: ${server.updated} (Days ${server.elapsedCheck} ago)`
+              p.card-text Space: 
+                if(server.space.length>1)
+                  table.table
+                    each space in server.space
+                      tr
+                        each cell in space.split(/ +/)
+                          td=cell 
+              p.card-text=`Last update: ${server.lastUpdate}` 
+              a.btn.btn-primary(role=button,href=`/get/info/direct/${server.name}`) Update 
+        each server in servers.vpn
+          .card
+            .card-body
+              h5.card-title=`${server.name} VPN`
+              h6.card-subtitle.mb-2.text-muted=server.distro
+              p.card-text=`Last check: ${server.updated} (Days ${server.elapsedCheck} ago)`
+              p.card-text Space: 
+                if(server.space.length>1)
+                  table.table
+                    each space in server.space
+                      tr
+                        each cell in space.split(/ +/)
+                          td=cell 
+              p.card-text=`Last update: ${server.lastUpdate}` 
+              a.btn.btn-primary(role=button,href=`/get/info/vpn/${server.name}`) Update 
