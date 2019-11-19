@@ -25,7 +25,7 @@ block content
                         each cell in space.split(/ +/)
                           td=cell 
               p.card-text=`Last update: ${server.lastUpdate}` 
-              a.btn.btn-primary(role=button,href=`/get/info/direct/${server.name}`) Update 
+              button.btn.btn-primary.update-server-info(role=button,type="direct",name=server.name) Update 
         each server in servers.vpn
           .card
             .card-body
@@ -40,4 +40,4 @@ block content
                         each cell in space.split(/ +/)
                           td=cell 
               p.card-text=`Last update: ${server.lastUpdate}` 
-              a.btn.btn-primary(role=button,href=`/get/info/vpn/${server.name}`) Update 
+              button.btn.btn-primary.update-server-info(role=button,type="vpn",name=server.name) Update 

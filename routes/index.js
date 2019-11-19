@@ -5,7 +5,7 @@ var servers = require('./../components/parsing/serverInfo').load
 let getInfo = require('./../components/helpers/getServerInfo')
 
 //This is called on start server so its ok but if not used here maybe should pass on to app.js
-var telegramController = require('./../components/controller/telegramController')
+//var telegramController = require('./../components/controller/telegramController')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

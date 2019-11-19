@@ -9,9 +9,23 @@ module.exports=function(params){
 			let name=params.name
 			let type=params.type
 			let currentServer=serverList[type][name]
-			host=currentServer.alias || currentServer.host
+			let host=currentServer.alias || currentServer.host
+			let command = ""
+			let distro=currentServer.distro
+			let paths=currentServer.paths || ["/$","/home"]
 			if(host == "") rej("no host")
-			var command="ssh "+host+" stat -c %y /var/lib/apt/periodic/update-success-stamp;df -h | grep '/$';df -h | grep '/home'"
+			if(distro=="ubuntu"){
+				command=`ssh ${host} "stat -c %y /var/lib/apt/periodic/update-success-stamp;`
+			}else if(distro=="arch"){
+				command=`ssh ${host} "lastUpgrade;`
+			}else{
+				command="echo 'Error! No command sent';"
+			}
+			paths.forEach(function(path){
+				command+=`df -h | grep '${path}';`
+			})
+			command+=`"`;
+			console.log(command)
 			cmd(command, callback)
 		
 			function callback(err, stdout, stderr){

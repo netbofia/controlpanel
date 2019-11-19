@@ -1,5 +1,1 @@
-{
-	"distro" : "arch",
-	"host":"madreputa.no-ip.org",
-	"alias":"fireworks"
-}
+{"name":"Fireworks","host":"madreputa.no-ip.org","os":"linux","distro":"arch","updated":"2019-11-19T18:28:11.358Z","space":["/dev/nvme0n1p5  410G  312G   94G  77% /home","/dev/nvme0n1p4   19G   18G  447M  98% /",""],"lastUpdate":" 0 days 4 hours and 36 minutes ago","paths":["/home$","/$"],"alias":"fireworks","file":"/Users/brunocosta/git/controlpanel/components/hosts/servers/Fireworks.json","elapsedCheck":0}
