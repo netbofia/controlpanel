@@ -15,7 +15,7 @@ module.exports=function(params){
 			let paths=currentServer.paths || ["/$","/home"]
 			if(host == "") rej("no host")
 			if(distro=="ubuntu"){
-				command=`ssh ${host} "stat -c %y /var/lib/apt/periodic/update-success-stamp;`
+				command=`ssh ${host} "/usr/lib/update-notifier/apt-check --human-readable;`
 			}else if(distro=="arch"){
 				command=`ssh ${host} "lastUpgrade;`
 			}else{

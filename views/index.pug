@@ -13,31 +13,45 @@ block content
       .col-6
         each server in servers.direct
           .card
-            .card-body
-              h5.card-title=server.name
-              h6.card-subtitle.mb-2.text-muted=server.distro
-              p.card-text=`Last check: ${server.updated} (Days ${server.elapsedCheck} ago)`
-              p.card-text Space: 
-                if(server.space.length>1)
-                  table.table
-                    each space in server.space
-                      tr
-                        each cell in space.split(/ +/)
-                          td=cell 
-              p.card-text=`Last update: ${server.lastUpdate}` 
-              button.btn.btn-primary.update-server-info(role=button,type="direct",name=server.name) Update 
+            .card-header
+              button.btn.btn-primary(type='button', data-toggle='collapse', data-target='#'+server.name, aria-expanded='false', aria-controls='collapseExample')=server.name 
+              h5.card-title(style="float:right")=`Days ${server.elapsedCheck} ago`
+            .collapse(id=server.name)
+              .card.card-body
+                h6.card-subtitle.mb-2.text-muted=server.distro
+                p.card-text=`Last check: ${server.updated} (Days ${server.elapsedCheck} ago)`
+                p.card-text Space: 
+                  if(server.space.length>1)
+                    table.table
+                      each space in server.space
+                        tr
+                          each cell in space.split(/ +/)
+                            td=cell 
+                p.card-text=`Last update: ${server.lastUpdate}` 
+                button.btn.btn-primary.update-server-info(role=button,type="direct",name=server.name) Update 
         each server in servers.vpn
           .card
-            .card-body
-              h5.card-title=`${server.name} VPN`
-              h6.card-subtitle.mb-2.text-muted=server.distro
-              p.card-text=`Last check: ${server.updated} (Days ${server.elapsedCheck} ago)`
-              p.card-text Space: 
-                if(server.space.length>1)
-                  table.table
-                    each space in server.space
-                      tr
-                        each cell in space.split(/ +/)
-                          td=cell 
-              p.card-text=`Last update: ${server.lastUpdate}` 
-              button.btn.btn-primary.update-server-info(role=button,type="vpn",name=server.name) Update 
+            .card-header
+              button.btn.btn-primary(type='button', data-toggle='collapse', data-target='#'+server.name, aria-expanded='false', aria-controls='collapseExample')=`${server.name} VPN` 
+              h5.card-title(style="float:right")=`Days ${server.elapsedCheck} ago`
+            .collapse(id=server.name)
+              .card-body 
+                h6.card-subtitle.mb-2.text-muted=server.distro
+                p.card-text=`Last check: ${server.updated} (Days ${server.elapsedCheck} ago)`
+                p.card-text Space: 
+                  if(server.space.length>1)
+                    table.table
+                      each space in server.space
+                        tr
+                          each cell in space.split(/ +/)
+                            td=cell 
+                p.card-text=`Last update: ${server.lastUpdate}` 
+                button.btn.btn-primary.update-server-info(role=button,type="vpn",name=server.name) Update 
+
+
+  p
+    button.btn.btn-primary(type='button', data-toggle='collapse', data-target='#collapseExample', aria-expanded='false', aria-controls='collapseExample')
+      | Button with data-target
+  #collapseExample.collapse
+    .card.card-body
+      | Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
